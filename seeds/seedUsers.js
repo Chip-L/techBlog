@@ -1,16 +1,19 @@
 const { User } = require("../models");
+const bcrypt = require("bcrypt");
 
-const userData = [
-  {
-    name: "user_1",
-    password: "pass1234",
-  },
-  {
-    name: "user_2",
-    password: "pass1234",
-  },
-];
+const getUserData = async (numToCreate) => {
+  const newUsers = [];
+  for (let i = 1; i <= numToCreate; i++) {
+    const hashedPwd = bcrypt.hashSync(`pass000${i}`, 10);
+    newUsers.push({
+      name: `user${i}`,
+      password: hashedPwd,
+    });
+  }
+  // console.log("newUsers:", newUsers);
+  return newUsers;
+};
 
-const seedUsers = () => User.bulkCreate(userData);
+const seedUsers = () => getUserData(3);
 
 module.exports = seedUsers;
