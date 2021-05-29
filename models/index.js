@@ -7,8 +7,6 @@ User.hasMany(Post, {
   onDelete: "CASCADE",
 });
 
-Post.belongsTo(User, {
-  foreignKey: "user_id",
-});
+Post.belongsTo(User);
 
 module.exports = { User, Post };

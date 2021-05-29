@@ -32,6 +32,7 @@ Post.init(
   },
   {
     sequelize,
+    underscored: true,
     timestamps: true, // ensure timestamps exist
     mode: "post",
   }
