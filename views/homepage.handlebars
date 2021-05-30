@@ -1,7 +1,17 @@
 {{#each posts as |post|}}
   <div class="card">
     <div class="card-header">
-      {{post.title}}
+      <div class="title">
+        {{post.title}}
+      </div>
+      <div class="post-info">
+        Posted by
+        {{post.id}}
+        on
+        {{post.created_at}}{{#if post.updated_at}}
+          updated on
+          {{post.updated_at}}{{/if}}.
+      </div>
     </div>
     <div class="card-body">
       {{post.content}}
