@@ -18,7 +18,7 @@ Post.init(
       allowNull: false,
     },
     content: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true, // they can enter only a title
     },
     // date_created: {}, -- let timestamp deal with this as createAt/updatedAt
