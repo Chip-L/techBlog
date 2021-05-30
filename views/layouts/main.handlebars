@@ -11,6 +11,24 @@
 
   </head>
   <body>
-    {{{body}}}
+    <header>
+      <div class="header-content">
+        <nav>
+          <a href="/">Home</a>
+          <a href="">Dashboard</a>
+          {{#if loggedIn}}
+            <a href="/logout">Logout</a>
+          {{else}}
+            <a href="/login">Login</a>
+          {{/if}}
+        </nav>
+        <div class="title">
+          <h1>The Tech Blog</h1>
+        </div>
+      </div>
+    </header>
+    <div class="main-content">
+      {{{body}}}
+    </div>
   </body>
 </html>
