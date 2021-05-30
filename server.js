@@ -1,9 +1,9 @@
 // bring in modules needed
+const path = require("path");
 const express = require("express");
 const session = require("express-session");
-const path = require("path");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
-require("dotenv").config();
+const exphbs = require("express-handlebars");
 
 // configure modules
 const sequelize = require("./config/connection");
@@ -12,11 +12,11 @@ const helpers = require("./utils/helpers");
 
 // setup server
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 // set up session
 const sess = {
-  secret: "super secret passphrase", // SESSION_SECRET,
+  secret: process.env.SESSION_SECRET,
   cookie: {},
   resave: false,
   saveUninitialized: true,
@@ -26,6 +26,11 @@ const sess = {
 };
 app.use(session(sess));
 
+// set up handlebars
+const hbs = exphbs.create({ helpers });
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
+
 // browser io middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -34,9 +39,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(routes);
 
-// User.sync({ alter: true }) - This checks what is the current state of the table in the database (which columns it has, what are their data types, etc), and then performs the necessary changes in the table to make it match the model.
+// connect to the MySQL server and start the server
 sequelize
-  .sync({ alter: true })
+  .sync({ force: false })
   .then(
     app.listen(PORT, () =>
       console.log(`Tech Blog is now listening to PORT: ${PORT}`)
