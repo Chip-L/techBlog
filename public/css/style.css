@@ -34,7 +34,7 @@ nav {
 
 nav a {
   color: var(--secondary);
-  font-size: 1.6rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -54,6 +54,17 @@ h1 {
   line-height: inherit;
   margin-bottom: 0.75rem;
   font-size: 3.75rem;
+}
+
+.card {
+  border: 0.02rem solid var(--primary);
+}
+
+.card-header {
+  background-color: var(--primary);
+  color: var(--secondary);
+
+  display: flex;
 }
 
 @media screen and (min-width: 456px) {

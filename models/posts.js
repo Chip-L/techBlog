@@ -21,7 +21,19 @@ Post.init(
       type: DataTypes.TEXT, // large sized content area (65,535 bytes)
       allowNull: true, // they can enter only a title
     },
-    // date_created: {}, -- let timestamp deal with this as createAt/updatedAt
+    // manually add the created date
+    created_at: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+
+    updated_at: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+      defaultValue: null,
+    },
+
     user_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -33,7 +45,7 @@ Post.init(
   {
     sequelize,
     underscored: true,
-    timestamps: true, // ensure timestamps exist
+    timestamps: false, // not necessary since I am handling this manually
     mode: "post",
   }
 );

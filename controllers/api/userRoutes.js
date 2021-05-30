@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
-//base url: http://localhost:3001/api +
+//base url: http://localhost:8080/api +
 
 //create new user
 router.post("/", async (req, res) => {
