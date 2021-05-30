@@ -18,7 +18,7 @@ Post.init(
       allowNull: false,
     },
     content: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT, // large sized content area (65,535 bytes)
       allowNull: true, // they can enter only a title
     },
     // date_created: {}, -- let timestamp deal with this as createAt/updatedAt
