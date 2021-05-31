@@ -22,7 +22,7 @@
         {{#each post.comments as |comment|}}
           <li>
             <div class="comment-header">
-              <div class="user">{{comment.user_id}}</div>
+              <div class="user">{{comment.user.name}}</div>
               <div class="post-info">
                 Comment created on
                 {{format_date comment.created_at}}{{#if comment.updated_at}}

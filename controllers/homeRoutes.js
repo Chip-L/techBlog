@@ -8,7 +8,23 @@ router.get("/", async (req, res) => {
   try {
     // get the posts (if any) - these display regardless of login status
     const rawPostData = await Post.findAll({
-      include: [{ model: User }, { model: Comment }],
+      include: [
+        {
+          model: User,
+          attributes: ["name", "created_at", "updated_at"],
+          // exclude: ["password"], doesn't seem to work
+        },
+        {
+          model: Comment,
+          include: [
+            {
+              model: User,
+              attributes: ["name"],
+            },
+          ],
+          attributes: ["comment", "created_at", "updated_at"],
+        },
+      ],
     });
 
     // ensure data was found
