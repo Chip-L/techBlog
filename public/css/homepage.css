@@ -100,8 +100,8 @@ li {
 }
 
 hr {
-  width: 75%;
-  margin: 0.5rem calc(25% / 2) 1rem;
+  width: 90%;
+  margin: 0.5rem 5% 1rem;
 }
 
 .comments form {

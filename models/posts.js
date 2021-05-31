@@ -21,13 +21,13 @@ Post.init(
     },
     // manually add the created date
     created_at: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
 
     updated_at: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: true,
       defaultValue: null,
     },
