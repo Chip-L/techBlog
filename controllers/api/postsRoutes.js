@@ -1,12 +1,11 @@
 const router = require("express").Router();
-const { User, Post, Comment } = require("../models");
-const { sequelize } = require("../models/users");
+const { User, Post, Comment } = require("../../models");
+const Sequelize = require("sequelize");
+const { sequelize } = require("../../models/users");
 
-//base url: http://localhost:8080/ +
-
-// display home page
 router.get("/", async (req, res) => {
   try {
+    // const Op = Sequelize.Op;
     // get the posts (if any) - these display regardless of login status
     const rawPostData = await Post.findAll({
       include: [
@@ -35,7 +34,7 @@ router.get("/", async (req, res) => {
               "maxDate",
             ],
           ],
-          order: ["maxDate", "DESC"],
+          order: [["comments.maxDate", "ASC"]], // not working
         },
       ],
     });
@@ -48,29 +47,11 @@ router.get("/", async (req, res) => {
     // serialize the posts
     const postData = rawPostData.map((post) => post.get({ plain: true }));
 
-    console.log(postData);
-
-    // render home page - submit session.loggedIn status for page
-    res.render("homepage", {
-      style: "homepage.css",
-      posts: postData,
-      loggedIn: req.session.loggedIn,
-    });
+    res.status(200).json(postData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
-});
-
-router.get("/login", (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect("/");
-    return;
-  }
-
-  res.render("login", {
-    style: "login.css",
-  });
 });
 
 module.exports = router;
