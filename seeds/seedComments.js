@@ -2,25 +2,27 @@ const { Comment } = require("../models");
 
 const commentData = [
   {
-    comment: "Test comment 1 for user 1",
+    comment: "Test comment 2 for post 1",
+    created_at: new Date(2021, 4, 27, 15, 05, 12, 0),
+    updated_at: new Date(2021, 4, 30, 9, 15, 12, 0),
     user_id: 1,
     post_id: 1,
   },
   {
-    comment: "Test comment 2 for user 1",
+    comment: "Test comment 3 for post 1",
     user_id: 1,
     post_id: 1,
   },
   {
     comment: "Test comment 2 for past",
-    created_at: new Date(2021, 4, 28),
+    created_at: new Date(2021, 4, 28, 14, 05, 12, 0),
     user_id: 1,
     post_id: 2,
   },
   {
     comment: "Test comment 2 for updated",
-    created_at: new Date(2021, 4, 28),
-    updated_at: new Date(2021, 4, 31),
+    created_at: new Date(2021, 4, 28, 15, 05, 12, 0),
+    updated_at: new Date(2021, 4, 31, 9, 15, 12, 0),
     user_id: 2,
     post_id: 2,
   },
