@@ -1,0 +1,136 @@
+.card {
+  margin: 1rem 0;
+  border: 0.02rem solid var(--primary);
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
+
+  padding: 0.5rem 1rem;
+  background-color: var(--primary);
+  color: var(--secondary);
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-info {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-body,
+.empty {
+  padding: 0.5rem 1rem;
+  line-height: 1.5;
+  font-size: 1.6rem;
+}
+
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_accordion_symbol */
+.accordion {
+  background-color: var(--unselected);
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.8rem 1rem;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  transition: 0.4s;
+}
+
+.accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f107";
+  color: var(--primary);
+  font-weight: bold;
+  float: right;
+  margin-right: 1rem;
+}
+
+.active:after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f106";
+}
+
+.comments {
+  padding: 0 0.5rem;
+  background-color: var(--unselected);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+ul {
+  margin: 0 0 1rem 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  margin: 0.5rem;
+  border: 0.1rem solid;
+  padding: 1rem;
+  background: var(--secondary);
+}
+
+.comment-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
+  /* border-bottom: ; */
+}
+
+.user {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+hr {
+  width: 75%;
+  margin: 0.5rem calc(25% / 2) 1rem;
+}
+
+.comments form {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+label,
+textarea {
+  margin-bottom: 0.5rem;
+}
+
+form button {
+  align-self: flex-end;
+  margin-right: 5rem;
+  max-width: 42.5rem;
+  margin-right: 5rem;
+  padding: 0.5rem 5rem;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 456px) {
+  .card {
+    border-radius: 0.25rem;
+  }
+
+  .card-header,
+  .comment-header {
+    flex-direction: row;
+  }
+}

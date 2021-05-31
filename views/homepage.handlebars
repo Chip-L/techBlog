@@ -16,7 +16,35 @@
     <div class="card-body">
       {{post.content}}
     </div>
+    <button class="accordion">Comments</button>
+    <div class="comments">
+      <ul>
+        {{#each post.comments as |comment|}}
+          <li>
+            <div class="comment-header">
+              <div class="user">{{comment.user_id}}</div>
+              <div class="post-info">
+                Comment created on
+                {{format_date comment.created_at}}{{#if comment.updated_at}}
+                  updated on
+                  {{format_date comment.updated_at}}{{/if}}.
+              </div>
+            </div>
+            <hr />
+            {{comment.comment}}</li>
+        {{/each}}
+        <li>
+          <form action="submit">
+            <label for="add_comment">Add Comment:</label>
+            <textarea name="add_comment"></textarea>
+            <button type="submit">Submit</button>
+          </form>
+        </li>
+      </ul>
+    </div>
   </div>
 {{else}}
   <p class="empty">No Content</p>
 {{/each}}
+
+<script src="js/homepage.js"></script>
