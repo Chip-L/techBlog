@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
     // serialize the posts
     const postData = rawPostData.map((post) => post.get({ plain: true }));
 
-    console.log(postData);
+    // console.log(postData);
 
     // render home page - submit session.loggedIn status for page
     res.render("homepage", {
@@ -70,6 +70,17 @@ router.get("/login", (req, res) => {
 
   res.render("login", {
     style: "login.css",
+  });
+});
+
+router.get("/createUser", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+
+  res.render("createUser", {
+    style: "createUser.css",
   });
 });
 
