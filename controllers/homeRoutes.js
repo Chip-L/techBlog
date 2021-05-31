@@ -7,7 +7,7 @@ const { User, Post } = require("../models");
 router.get("/", async (req, res) => {
   try {
     // get the posts (if any) - these display regardless of login status
-    const rawPostData = await Post.findAll();
+    const rawPostData = await Post.findAll({ include: [User] });
 
     // ensure data was found
     if (!rawPostData) {
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
     // serialize the posts
     const postData = rawPostData.map((post) => post.get({ plain: true }));
 
-    console.log(postData);
+    // console.log(postData);
 
     // render home page - submit session.loggedIn status for page
     res.render("homepage", {

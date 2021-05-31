@@ -6,11 +6,11 @@
       </div>
       <div class="post-info">
         Posted by
-        {{post.id}}
+        {{post.user.name}}
         on
-        {{post.created_at}}{{#if post.updated_at}}
+        {{format_date post.created_at}}{{#if post.updated_at}}
           updated on
-          {{post.updated_at}}{{/if}}.
+          {{format_date post.updated_at}}{{/if}}.
       </div>
     </div>
     <div class="card-body">
