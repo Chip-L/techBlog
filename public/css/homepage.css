@@ -1,3 +1,8 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .card {
   margin: 1rem 0;
   border: 0.02rem solid var(--primary);
@@ -73,13 +78,7 @@
   transition: max-height 0.2s ease-out;
 }
 
-ul {
-  margin: 0 0 1rem 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-li {
+.comment {
   margin: 0.5rem;
   border: 0.1rem solid;
   padding: 1rem;

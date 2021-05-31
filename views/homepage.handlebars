@@ -1,47 +1,45 @@
 {{#each posts as |post|}}
-  <div class="card">
-    <div class="card-header">
-      <div class="title">
-        {{post.title}}
+  <div class="card post" id={{post.id}}>
+    <a href="/dashboard/{{post.id}}">
+      <div class="card-header">
+        <div class="title">
+          {{post.title}}
+        </div>
+        <div class="post-info">
+          Posted by
+          {{post.user.name}}
+          on
+          {{format_date post.created_at}}{{#if post.updated_at}}
+            updated on
+            {{format_date post.updated_at}}{{/if}}.
+        </div>
       </div>
-      <div class="post-info">
-        Posted by
-        {{post.user.name}}
-        on
-        {{format_date post.created_at}}{{#if post.updated_at}}
-          updated on
-          {{format_date post.updated_at}}{{/if}}.
+      <div class="card-body">
+        {{post.content}}
       </div>
-    </div>
-    <div class="card-body">
-      {{post.content}}
-    </div>
-    <button class="accordion">Comments</button>
-    <div class="comments">
-      <ul>
-        {{#each post.comments as |comment|}}
-          <li>
-            <div class="comment-header">
-              <div class="user">{{comment.user.name}}</div>
-              <div class="post-info">
-                Comment created on
-                {{format_date comment.created_at}}{{#if comment.updated_at}}
-                  updated on
-                  {{format_date comment.updated_at}}{{/if}}.
+    </a>
+    {{#if post.comments}}
+      <button class="accordion">Comments</button>
+      <div class="comments">
+        <a href="/dashboard/{{post.id}}">
+          {{#each post.comments as |comment|}}
+            <div class="comment">
+              <div class="comment-header">
+                <div class="user">{{comment.user.name}}</div>
+                <div class="post-info">
+                  Comment created on
+                  {{format_date comment.created_at}}{{#if comment.updated_at}}
+                    updated on
+                    {{format_date comment.updated_at}}{{/if}}.
+                </div>
               </div>
+              <hr />
+              {{comment.comment}}
             </div>
-            <hr />
-            {{comment.comment}}</li>
-        {{/each}}
-        <li>
-          <form action="submit">
-            <label for="add_comment">Add Comment:</label>
-            <textarea name="add_comment"></textarea>
-            <button type="submit">Submit</button>
-          </form>
-        </li>
-      </ul>
-    </div>
+          {{/each}}
+        </a>
+      </div>
+    {{/if}}
   </div>
 {{else}}
   <p class="empty">No Content</p>
