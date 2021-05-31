@@ -1,0 +1,41 @@
+form {
+  border: 0.1rem solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+label {
+  margin-bottom: 1rem;
+  margin-right: 0;
+}
+
+button {
+  margin: 1rem;
+}
+
+p {
+  margin: 1rem;
+}
+
+@media screen and (min-width: 456px) {
+  form {
+    border-radius: 0.5rem;
+  }
+
+  .container {
+    flex-direction: row;
+  }
+
+  label {
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+}
