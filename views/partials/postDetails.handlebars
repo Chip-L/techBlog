@@ -1,7 +1,5 @@
-<script>console.log(post)</script>
-
-<div class="card post" id={{post.id}}>
-  <a href="/dashboard/{{post.id}}">
+<div class="card post" id={{id}}>
+  <a href="/dashboard/{{id}}">
     <div class="card-header">
       <div class="title">
         {{title}}
@@ -10,7 +8,7 @@
         Posted by
         {{user.name}}
         on
-        {{format_date created_at}}{{#if post.updated_at}}
+        {{format_date created_at}}{{#if updated_at}}
           updated on
           {{format_date updated_at}}{{/if}}.
       </div>

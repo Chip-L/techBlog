@@ -54,4 +54,51 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/dashboard", async (req, res) => {
+  // console.log("dashboard");
+  try {
+    const userId = 3; // req.session.user_id;
+    const rawPostData = await Post.findAll({
+      where: { user_id: userId },
+      include: [
+        {
+          model: User,
+          attributes: ["name", "created_at", "updated_at"],
+        },
+        {
+          model: Comment,
+          include: [
+            {
+              model: User,
+              attributes: ["name"],
+            },
+          ],
+          attributes: [
+            "comment",
+            "created_at",
+            "updated_at",
+            [
+              sequelize.fn(
+                "IFNULL",
+                sequelize.col("comments.updated_at"),
+                sequelize.col("comments.created_at")
+              ),
+              "maxDate",
+            ],
+          ],
+          order: ["maxDate", "DESC"],
+        },
+      ],
+    });
+
+    // serialize the posts
+    const postData = rawPostData.map((post) => post.get({ plain: true }));
+
+    res.status(200).json(postData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

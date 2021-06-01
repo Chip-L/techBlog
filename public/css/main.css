@@ -13,6 +13,7 @@ body {
   flex-direction: column;
   align-items: center;
 
+  min-width: 90%;
   background-color: var(--secondary);
   font-size: 1.6rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -81,6 +82,8 @@ h1 {
 
 @media screen and (min-width: 456px) {
   .main-content {
+    min-width: 95%; /* this adds the width, but ignores the padding */
+    max-width: 100%; /* this adds the padding but ignores the width */
     padding: 0 2.5rem;
   }
 }

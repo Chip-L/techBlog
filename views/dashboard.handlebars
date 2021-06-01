@@ -1,0 +1,9 @@
+<button id="addPost">Add new post</button>
+
+{{#each posts as |post|}}
+  {{> postDetails}}
+{{else}}
+  <p class="empty">Add some posts!!</p>
+{{/each}}
+
+<script src="js/dashboard.js"></script>

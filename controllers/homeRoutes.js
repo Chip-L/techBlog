@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require("../models");
 const { sequelize } = require("../models/users");
+const withAuth = require("../utils/auth");
 
 //base url: http://localhost:8080/ +
 
@@ -52,7 +53,7 @@ router.get("/", async (req, res) => {
 
     // render home page - submit session.loggedIn status for page
     res.render("homepage", {
-      style: "homepage.css",
+      style: "postDetails.css",
       posts: postData,
       loggedIn: req.session.loggedIn,
     });
@@ -82,6 +83,65 @@ router.get("/createUser", (req, res) => {
   res.render("createUser", {
     style: "createUser.css",
   });
+});
+
+router.get("/dashboard", withAuth, async (req, res) => {
+  // console.log("dashboard");
+  try {
+    const userId = req.session.user_id;
+
+    const rawPostsData = await Post.findAll({
+      where: { user_id: userId },
+      include: [
+        {
+          model: User,
+          attributes: ["name", "created_at", "updated_at"],
+        },
+        {
+          model: Comment,
+          include: [
+            {
+              model: User,
+              attributes: ["name"],
+            },
+          ],
+          attributes: [
+            "comment",
+            "created_at",
+            "updated_at",
+            [
+              sequelize.fn(
+                "IFNULL",
+                sequelize.col("comments.updated_at"),
+                sequelize.col("comments.created_at")
+              ),
+              "maxDate",
+            ],
+          ],
+          order: ["maxDate", "DESC"],
+        },
+      ],
+    });
+
+    console.log("rawPostsData:", rawPostsData);
+    // if(!rawPostsData) {
+    //   res.status(404).json({message: "No posts found!"})
+    // }
+    const postData = await rawPostsData.map((post) =>
+      post.get({ plain: true })
+    );
+
+    console.log(postData);
+
+    res.render("dashboard", {
+      style: "postDetails.css",
+      posts: postData,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
