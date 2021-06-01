@@ -1,0 +1,44 @@
+<script>console.log(post)</script>
+
+<div class="card post" id={{post.id}}>
+  <a href="/dashboard/{{post.id}}">
+    <div class="card-header">
+      <div class="title">
+        {{title}}
+      </div>
+      <div class="post-info">
+        Posted by
+        {{user.name}}
+        on
+        {{format_date created_at}}{{#if post.updated_at}}
+          updated on
+          {{format_date updated_at}}{{/if}}.
+      </div>
+    </div>
+    <div class="card-body">
+      {{content}}
+    </div>
+  </a>
+  {{#if comments}}
+    <button class="accordion">Comments</button>
+    <div class="comments">
+      <a href="/dashboard/{{id}}">
+        {{#each comments as |comment|}}
+          <div class="comment">
+            <div class="comment-header">
+              <div class="user">{{comment.user.name}}</div>
+              <div class="post-info">
+                Comment created on
+                {{format_date comment.created_at}}{{#if comment.updated_at}}
+                  updated on
+                  {{format_date comment.updated_at}}{{/if}}.
+              </div>
+            </div>
+            <hr />
+            {{comment.comment}}
+          </div>
+        {{/each}}
+      </a>
+    </div>
+  {{/if}}
+</div>
