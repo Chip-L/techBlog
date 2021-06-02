@@ -4,12 +4,6 @@
   --unselected: #a7a7a7;
 }
 
-/* override defaults for anchor tags */
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 html {
   font-size: 62.5%;
 }
@@ -50,6 +44,8 @@ nav {
 nav a {
   margin-bottom: 1rem;
   font-size: 2rem;
+  text-decoration: none;
+  color: inherit;
 }
 
 .nav-btn {

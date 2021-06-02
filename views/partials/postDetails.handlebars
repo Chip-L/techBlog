@@ -40,11 +40,16 @@
     {{/if}}
     <div>
       <div class="comment">
-        <form class="form-add-comment" id="{{id}}">
-          <label for="add_comment">Add Comment:</label>
-          <textarea id="comment{{id}}" name="add_comment"></textarea>
-          <button class="post-btn right-btn" type="submit">Submit</button>
-        </form>
+        {{#if @root.loggedIn}}
+          <form class="form-add-comment" id="{{id}}">
+            <label for="add_comment">Add Comment:</label>
+            <textarea id="comment{{id}}" name="add_comment"></textarea>
+            <button class="post-btn right-btn" type="submit">Submit</button>
+          </form>
+        {{else}}
+          <a href="/login">Log in</a>
+          to add a comment.
+        {{/if}}
       </div>
     </div>
   </div>
