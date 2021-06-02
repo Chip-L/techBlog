@@ -40,9 +40,9 @@
     {{/if}}
     <div>
       <div class="comment">
-        <form action="submit">
+        <form class="form-add-comment" id="{{id}}">
           <label for="add_comment">Add Comment:</label>
-          <textarea name="add_comment"></textarea>
+          <textarea id="comment{{id}}" name="add_comment"></textarea>
           <button class="post-btn right-btn" type="submit">Submit</button>
         </form>
       </div>

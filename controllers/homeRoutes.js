@@ -1,6 +1,7 @@
 const router = require("express").Router();
+const Sequelize = require("sequelize");
 const { User, Post, Comment } = require("../models");
-const { sequelize } = require("../models/users");
+// const { sequelize } = require("../models/users");
 const withAuth = require("../utils/auth");
 
 //base url: http://localhost:8080/ +
@@ -28,10 +29,10 @@ router.get("/", async (req, res) => {
             "created_at",
             "updated_at",
             [
-              sequelize.fn(
+              Sequelize.fn(
                 "IFNULL",
-                sequelize.col("comments.updated_at"),
-                sequelize.col("comments.created_at")
+                Sequelize.col("comments.updated_at"),
+                Sequelize.col("comments.created_at")
               ),
               "maxDate",
             ],
@@ -110,10 +111,10 @@ router.get("/dashboard", withAuth, async (req, res) => {
             "created_at",
             "updated_at",
             [
-              sequelize.fn(
+              Sequelize.fn(
                 "IFNULL",
-                sequelize.col("comments.updated_at"),
-                sequelize.col("comments.created_at")
+                Sequelize.col("comments.updated_at"),
+                Sequelize.col("comments.created_at")
               ),
               "maxDate",
             ],
@@ -123,17 +124,11 @@ router.get("/dashboard", withAuth, async (req, res) => {
       ],
     });
 
-    console.log("rawPostsData:", rawPostsData);
-    // if(!rawPostsData) {
-    //   res.status(404).json({message: "No posts found!"})
-    // }
     const postData = await rawPostsData.map((post) =>
       post.get({ plain: true })
     );
 
     postData.forEach((post) => (post.showEdit = true));
-
-    console.log(postData);
 
     res.render("dashboard", {
       style: "postDetails.css",

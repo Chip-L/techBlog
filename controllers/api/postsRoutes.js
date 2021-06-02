@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require("../../models");
 const Sequelize = require("sequelize");
-const { sequelize } = require("../../models/users");
+// const { sequelize } = require("../../models/users");
 
 router.get("/", async (req, res) => {
   try {
@@ -26,10 +26,10 @@ router.get("/", async (req, res) => {
             "created_at",
             "updated_at",
             [
-              sequelize.fn(
+              Sequelize.fn(
                 "IFNULL",
-                sequelize.col("comments.updated_at"),
-                sequelize.col("comments.created_at")
+                Sequelize.col("comments.updated_at"),
+                Sequelize.col("comments.created_at")
               ),
               "maxDate",
             ],
@@ -57,7 +57,7 @@ router.get("/", async (req, res) => {
 router.get("/dashboard", async (req, res) => {
   // console.log("dashboard");
   try {
-    const userId = 3; // req.session.user_id;
+    const userId = 1; // req.session.user_id;
     const rawPostData = await Post.findAll({
       where: { user_id: userId },
       include: [
@@ -78,10 +78,10 @@ router.get("/dashboard", async (req, res) => {
             "created_at",
             "updated_at",
             [
-              sequelize.fn(
+              Sequelize.fn(
                 "IFNULL",
-                sequelize.col("comments.updated_at"),
-                sequelize.col("comments.created_at")
+                Sequelize.col("comments.updated_at"),
+                Sequelize.col("comments.created_at")
               ),
               "maxDate",
             ],
@@ -104,9 +104,12 @@ router.get("/dashboard", async (req, res) => {
 /** needs comment, post_id, and user_id (can get user_id from session) in the submission */
 router.post("/addComment", async (req, res) => {
   try {
-    console.log(req.body);
+    const body = req.body;
+    body.user_id = req.session.user_id;
 
-    const newComment = await Comment.create(req.body);
+    console.log(body);
+
+    const newComment = await Comment.create(body);
 
     res.status(200).json(newComment);
   } catch (err) {
