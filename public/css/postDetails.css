@@ -32,9 +32,12 @@ a {
 
 .card-body,
 .empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
   padding: 0.5rem 1rem;
   line-height: 1.5;
-  font-size: 1.6rem;
 }
 
 /* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_accordion_symbol */
@@ -115,13 +118,19 @@ textarea {
   margin-bottom: 0.5rem;
 }
 
-form button {
+.right-btn {
   align-self: flex-end;
   margin-right: 5rem;
   max-width: 42.5rem;
   margin-right: 5rem;
+}
+
+.post-btn {
   padding: 0.5rem 5rem;
   font-weight: bold;
+  background: var(--primary);
+  color: var(--secondary);
+  border-radius: 0.75rem;
 }
 
 @media screen and (min-width: 456px) {

@@ -1,42 +1,51 @@
 <div class="card post" id={{id}}>
-  <a href="/dashboard/{{id}}">
-    <div class="card-header">
-      <div class="title">
-        {{title}}
-      </div>
-      <div class="post-info">
-        Posted by
-        {{user.name}}
-        on
-        {{format_date created_at}}{{#if updated_at}}
-          updated on
-          {{format_date updated_at}}{{/if}}.
-      </div>
+  <div class="card-header">
+    <div class="title">
+      {{title}}
     </div>
-    <div class="card-body">
-      {{content}}
+    <div class="post-info">
+      Posted by
+      {{user.name}}
+      on
+      {{format_date created_at}}{{#if updated_at}}
+        updated on
+        {{format_date updated_at}}{{/if}}.
     </div>
-  </a>
-  {{#if comments}}
-    <button class="accordion">Comments</button>
-    <div class="comments">
-      <a href="/dashboard/{{id}}">
-        {{#each comments as |comment|}}
-          <div class="comment">
-            <div class="comment-header">
-              <div class="user">{{comment.user.name}}</div>
-              <div class="post-info">
-                Comment created on
-                {{format_date comment.created_at}}{{#if comment.updated_at}}
-                  updated on
-                  {{format_date comment.updated_at}}{{/if}}.
-              </div>
+  </div>
+  <div class="card-body">
+    {{content}}
+    {{#if showEdit}}
+      <br />
+      <button class="post-btn right-btn">Edit Me</button>
+    {{/if}}
+  </div>
+  <button class="accordion">Comments</button>
+  <div class="comments">
+    {{#if comments}}
+      {{#each comments as |comment|}}
+        <div class="comment">
+          <div class="comment-header">
+            <div class="user">{{comment.user.name}}</div>
+            <div class="post-info">
+              Comment created on
+              {{format_date comment.created_at}}{{#if comment.updated_at}}
+                updated on
+                {{format_date comment.updated_at}}{{/if}}.
             </div>
-            <hr />
-            {{comment.comment}}
           </div>
-        {{/each}}
-      </a>
+          <hr />
+          {{comment.comment}}
+        </div>
+      {{/each}}
+    {{/if}}
+    <div>
+      <div class="comment">
+        <form action="submit">
+          <label for="add_comment">Add Comment:</label>
+          <textarea name="add_comment"></textarea>
+          <button class="post-btn right-btn" type="submit">Submit</button>
+        </form>
+      </div>
     </div>
-  {{/if}}
+  </div>
 </div>

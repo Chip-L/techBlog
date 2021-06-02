@@ -131,12 +131,15 @@ router.get("/dashboard", withAuth, async (req, res) => {
       post.get({ plain: true })
     );
 
+    postData.forEach((post) => (post.showEdit = true));
+
     console.log(postData);
 
     res.render("dashboard", {
       style: "postDetails.css",
       posts: postData,
       loggedIn: req.session.loggedIn,
+      showEdit: true,
     });
   } catch (err) {
     console.log(err);
