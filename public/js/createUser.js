@@ -4,8 +4,6 @@ async function createFormHandler(event) {
   const username = document.querySelector("#username").value;
   const password = document.querySelector("#password").value;
 
-  console.log(username, password);
-
   if (username && password) {
     const response = await fetch("/api/users/", {
       method: "POST",

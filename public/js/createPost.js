@@ -14,13 +14,16 @@ async function submitEventHandler(event) {
     content: document.querySelector("#content").value,
   };
 
-  if (formSubmit.dataset.id) {
-    body.id = formSubmit.dataset.id;
+  console.log(formSubmit.id);
+
+  if (formSubmit.id) {
+    body.id = formSubmit.id;
   }
 
   console.log(body);
+  console.log(body.title && body.content);
 
-  if (title && content) {
+  if (body.title && body.content) {
     const response = await fetch("/api/posts/addPost", {
       method: "POST",
       body: JSON.stringify(body),
@@ -35,6 +38,6 @@ async function submitEventHandler(event) {
   }
 }
 
-function deleteEventHandler(eventt) {
+function deleteEventHandler(event) {
   console.log("I said delete!");
 }

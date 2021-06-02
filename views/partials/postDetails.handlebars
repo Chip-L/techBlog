@@ -1,4 +1,4 @@
-<div class="card post" id={{id}}>
+<div class="card post"><!-- id="{{id}}" -->
   <div class="card-header">
     <div class="title">
       {{title}}
@@ -16,7 +16,7 @@
     {{content}}
     {{#if showEdit}}
       <br />
-      <button class="post-btn right-btn">Edit Me</button>
+      <button class="post-btn right-btn editMe" id="{{id}}">Edit Me</button>
     {{/if}}
   </div>
   <button class="accordion">Comments</button>

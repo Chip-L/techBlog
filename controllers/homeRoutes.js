@@ -150,11 +150,9 @@ router.get("/createPost", withAuth, (req, res) => {
 
 router.get("/createPost/:id", withAuth, async (req, res) => {
   try {
-    const postData = await Post.findByPk({
-      where: {
-        name: req.params.id,
-      },
-    });
+    const rawPostData = await Post.findByPk(req.params.id);
+
+    const postData = rawPostData.get({ plain: true });
 
     res.render("createPost", {
       style: "createPost.css",

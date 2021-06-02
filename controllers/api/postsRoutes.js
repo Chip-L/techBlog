@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { User, Post, Comment } = require("../../models");
 const Sequelize = require("sequelize");
+const { User, Post, Comment } = require("../../models");
 // const { sequelize } = require("../../models/users");
 
 router.get("/", async (req, res) => {
@@ -127,7 +127,18 @@ router.post("/addPost", async (req, res) => {
     console.log(body);
 
     if (body.id) {
-      // update post
+      newPost = await Post.update(
+        {
+          title: body.title,
+          content: body.content,
+          updated_at: Date.now(),
+        },
+        {
+          where: {
+            id: body.id,
+          },
+        }
+      );
     } else {
       newPost = await Post.create(body);
     }
