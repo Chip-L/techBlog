@@ -101,4 +101,18 @@ router.get("/dashboard", async (req, res) => {
   }
 });
 
+/** needs comment, post_id, and user_id (can get user_id from session) in the submission */
+router.post("/addComment", async (req, res) => {
+  try {
+    console.log(req.body);
+
+    const newComment = await Comment.create(req.body);
+
+    res.status(200).json(newComment);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
