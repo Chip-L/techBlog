@@ -118,4 +118,25 @@ router.post("/addComment", async (req, res) => {
   }
 });
 
+router.post("/addPost", async (req, res) => {
+  try {
+    let newPost;
+    const body = req.body;
+    body.user_id = req.session.user_id;
+
+    console.log(body);
+
+    if (body.id) {
+      // update post
+    } else {
+      newPost = await Post.create(body);
+    }
+
+    res.status(200).json(newPost);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

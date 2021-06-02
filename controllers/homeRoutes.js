@@ -142,4 +142,29 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
+router.get("/createPost", withAuth, (req, res) => {
+  res.render("createPost", {
+    style: "createPost.css",
+  });
+});
+
+router.get("/createPost/:id", withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk({
+      where: {
+        name: req.params.id,
+      },
+    });
+
+    res.render("createPost", {
+      style: "createPost.css",
+      edit: true,
+      postData,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

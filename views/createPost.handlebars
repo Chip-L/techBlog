@@ -1,0 +1,20 @@
+<form data-postId="{{postData.id}}">
+  <label for="title">Please add your title:</label>
+  <input type="text" name="title" id="title" value="{{postData.title}}" />
+
+  <label for="content">Please add you content:</label>
+  <textarea name="content" id="content">{{postData.content}}</textarea>
+
+  <div class="container">
+    <button class="post-btn right-btn" type="submit">Submit</button>
+    {{#if edit}}
+      <button
+        class="post-btn left-btn"
+        id="delete"
+        type="button"
+      >Delete</button>
+    {{/if}}
+  </div>
+</form>
+
+<script src="js/createPost.js"></script>

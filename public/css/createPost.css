@@ -1,0 +1,63 @@
+form {
+  border: 0.1rem solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+label,
+input,
+textarea {
+  margin-bottom: 0.5rem;
+  min-width: 100%;
+}
+
+label::after {
+  content: "*";
+  color: red;
+  margin-left: 0.5rem;
+}
+
+#title {
+  resize: none;
+  padding: 1px 2px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+}
+
+.post-btn {
+  margin: 1rem 0;
+  padding: 0.5rem 5rem;
+  font-weight: bold;
+  background: var(--primary);
+  color: var(--secondary);
+  border-radius: 0.75rem;
+  min-width: 100%;
+}
+
+@media screen and (min-width: 456px) {
+  .container {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .post-btn {
+    min-width: auto;
+  }
+
+  .left-btn {
+    flex: none;
+    align-self: flex-start;
+    margin: 1rem 0 0.5rem 5rem;
+  }
+
+  .right-btn {
+    flex: none;
+    align-self: flex-end;
+    margin: 1rem 5rem 0.5rem 0;
+  }
+}
