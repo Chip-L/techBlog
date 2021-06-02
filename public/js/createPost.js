@@ -14,14 +14,9 @@ async function submitEventHandler(event) {
     content: document.querySelector("#content").value,
   };
 
-  console.log(formSubmit.id);
-
   if (formSubmit.id) {
     body.id = formSubmit.id;
   }
-
-  console.log(body);
-  console.log(body.title && body.content);
 
   if (body.title && body.content) {
     const response = await fetch("/api/posts/addPost", {
@@ -38,6 +33,16 @@ async function submitEventHandler(event) {
   }
 }
 
-function deleteEventHandler(event) {
+async function deleteEventHandler(event) {
   console.log("I said delete!");
+  const response = await fetch("/api/posts/" + formSubmit.id, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    document.location.replace("/dashboard");
+  } else {
+    alert("Failed to delete post");
+  }
 }

@@ -118,6 +118,7 @@ router.post("/addComment", async (req, res) => {
   }
 });
 
+// I combined the post and put verbs here. IT depends on the data sent if it comes with an ID, then I update otherwise I add
 router.post("/addPost", async (req, res) => {
   try {
     let newPost;
@@ -144,6 +145,20 @@ router.post("/addPost", async (req, res) => {
     }
 
     res.status(200).json(newPost);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    if (req.params.id) {
+      const deletedPost = await Post.destroy({
+        where: { id: req.params.id },
+      });
+      res.status(200).json(deletedPost);
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
